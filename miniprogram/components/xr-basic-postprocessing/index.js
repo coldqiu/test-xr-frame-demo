@@ -141,12 +141,12 @@ Component({
     }
   },
   methods: {
-    handleReady: function({detail}) {
+    handleReady: function ({ detail }) {
       this.scene = detail.value;
       console.log('scene', detail.value);
       this.activeBlur();
     },
-    handleTick: function() {
+    handleTick: function () {
       // const camera = this.scene.getNodeById("camera");
       // const transform = camera.el._components.transform;
       // if (transform.rotation.y > Math.PI * 0.25) {
@@ -155,12 +155,55 @@ Component({
       //   transform.rotation.y = -Math.PI * 0.25;
       // }
     },
-    handleAssetsProgress: function({detail}) {
+    handleAssetsProgress: function ({ detail }) {
       this.triggerEvent('assetsProgress', detail.value);
     },
-    handleAssetsLoaded: function({detail}) {
+    handleAssetsLoaded: function ({ detail }) {
       this.triggerEvent('assetsLoaded', detail.value);
-      this.setData({loaded: true});
+      this.setData({ loaded: true });
+      this.setMeshRender()
+      console.log('setMeshRender: ', 11111);
+    },
+
+    async setMeshRender() {
+      const xrFrameSystem = wx.getXrFrameSystem()
+      const magicField = this.scene.getElementById("magicField");
+      const tempSystem = magicField.getComponent("custom-particle")
+
+      // tempSystem.addSizeGradient(0,0.7);
+      // tempSystem.addSizeGradient(0.5,1.0);
+      // tempSystem.addColorGradient(0, xrFrameSystem.Vector4.createFromNumber(1, 0.89, 0.27, 1));
+      // tempSystem.addColorGradient(1, xrFrameSystem.Vector4.createFromNumber(1, 0.64, 0, 1));
+      // tempSystem.addAlphaGradient(0, 0, 0);
+      // tempSystem.addAlphaGradient(0.5, 1, 1);
+      // tempSystem.addAlphaGradient(1, 0, 0);
+
+      // tempSystem.addColorGradient(0, xrFrameSystem.Vector4.createFromNumber(1, 0.89, 0.27, 1));
+      tempSystem.addColorGradient(1, xrFrameSystem.Vector4.createFromNumber(0.75, 0.67, 0.41, 1));
+      tempSystem.addColorGradient(0, xrFrameSystem.Vector4.createFromNumber(0.75, 0.67, 0.41, 1));
+      // color(srgb 0.75 0.72 0.41)
+      // (1, 0.64, 0, 0.6)
+
+      // tempSystem.addAlphaGradient(0, 0.3, 0.3);
+      // tempSystem.addAlphaGradient(0.5, 0.5, 0.5);
+      // tempSystem.addAlphaGradient(1, 0.5, 0.5);
+
+      tempSystem.addAlphaGradient(0, 0.2, 0.2);
+      tempSystem.addAlphaGradient(0.5, 0.3, 0.3);
+      tempSystem.addAlphaGradient(1, 0.5, 0.5);
+
+
+      // Color3Gradient
+      // const Vector3 = xrFrameSystem.Vector3
+      // //   ReferenceError: Color3Gradient is not defined
+      // // at CustomParticle.addRampGradient
+      // tempSystem.useRampGradient = true;
+      // tempSystem.addRampGradient(0.0, Vector3.createFromNumber(1, 1, 1));
+      // tempSystem.addRampGradient(0.2, Vector3.createFromNumber(0.8, 0.8, 0.05));
+      // tempSystem.addRampGradient(0.4, Vector3.createFromNumber(0.86, 0.5, 0.05));
+      // tempSystem.addRampGradient(0.6, Vector3.createFromNumber(0.75, 0.18, 0.07));
+      // tempSystem.addRampGradient(0.8, Vector3.createFromNumber(0.45, 0.08, 0.06));
+      // tempSystem.addRampGradient(1, Vector3.createFromNumber(0.05, 0.05, 0.05));
     },
     activeBlur() {
       this.setData(blurData);

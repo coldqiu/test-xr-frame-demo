@@ -10,6 +10,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "postprocessing",
+          "pathName": "pages/basic/scene-basic-postprocessing/index",
+          "query": "path=%2Fpages%2Fbasic%2Fscene-basic-postprocessing%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "template-markerCenter",
           "pathName": "pages/template/xr-template-markerCenter/index",
           "query": "path=%2Fpages%2Ftemplate%2Fxr-template-markerCenter%2Findex",
